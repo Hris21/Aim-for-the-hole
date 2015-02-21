@@ -12,7 +12,9 @@ namespace Game
         static Random rnd = new Random();
         public static int[] size = { 8, 8 };
         public static char[,] board = new char[size[0], size[1]];
-
+        static int x;
+        static int y;
+        static int updateRate = 0;
         static void Main()
         {
             Console.Clear();
@@ -40,23 +42,53 @@ namespace Game
         static void Play(int width, int height)
         {
             int[] line = { 1, 1 };
-
+            x = width / 2;
+            y = height - 2;
             while (true)
             {
                 line = FallingLines(line);
-                Console.Clear();
                 char[,] board = new char[width, height];
-                board = Board(board, line);
-
+                board = Board(board, line, x, y);
+                StringBuilder renderer = new StringBuilder("");
                 for (int i = 0; i < board.GetLength(1); i++)
                 {
                     for (int j = 0; j < board.GetLength(0); j++)
                     {
-                        Console.Write(board[j, i]);
+                        renderer.Append(board[j, i]);
                     }
-                    Console.WriteLine();
+                    if (i == 0) renderer.Append("Highscore");
+                    renderer.Append("\n");
                 }
-                Thread.Sleep(1000);
+                Console.Clear();
+                Console.WriteLine(renderer);
+                if (Console.KeyAvailable)
+                {
+                    ConsoleKeyInfo userInput = Console.ReadKey();
+                    if (userInput.Key == ConsoleKey.LeftArrow)
+                    {
+                        x--;
+                        if (x < 1) x++;
+
+                    }
+                    if (userInput.Key == ConsoleKey.RightArrow)
+                    {
+                        x++;
+                        if (x > width - 2) x--;
+                    }
+                    if (userInput.Key == ConsoleKey.UpArrow)
+                    {
+                        y--;
+                        if (y < 1) y++;
+                    }
+                    if (userInput.Key == ConsoleKey.DownArrow)
+                    {
+                        y++;
+                        if (y > height - 2) y--;
+                    }
+
+                }
+
+                Thread.Sleep(20);
             }
         }
 
@@ -67,7 +99,7 @@ namespace Game
             Console.ReadLine();
         }
 
-        static char[,] Board(char[,] board, int[] line)
+        static char[,] Board(char[,] board, int[] line, int x, int y)
         {
             for (int i = 0; i < board.GetLength(0); i++)
             {
@@ -87,17 +119,24 @@ namespace Game
                 board[i, line[1]] = '_';
             }
             board[line[0], line[1]] = ' ';
+            board[x, y] = '@';
             return board;
         }
 
         static int[] FallingLines(int[] line)
         {
-            line[1]++;
-            if (line[1] > size[1] - 2)
+            if (updateRate == 10)
             {
-                line[1] = 1;
-                line[0] = rnd.Next(1, size[1] - 2);
+
+                line[1]++;
+                if (line[1] > size[1] - 2)
+                {
+                    line[1] = 1;
+                    line[0] = rnd.Next(1, size[1] - 2);
+                }
+                updateRate = 0;
             }
+            else updateRate++;
             return line;
         }
 
