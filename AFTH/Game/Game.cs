@@ -9,11 +9,12 @@ namespace Game
 {
     class Game
     {
+        public static int[] size = { 8, 8 };
+        public static char[,] board = new char[size[0], size[1]];
+
         static void Main()
         {
             Console.Clear();
-            int[] size = {8, 8};
-            char[,] board = new char[size[0], size[1]];
 
             while (true)
             {
