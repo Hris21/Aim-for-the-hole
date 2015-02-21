@@ -9,12 +9,13 @@ namespace Game
 {
     class Game
     {
-        static Random rnd = new Random();
-        public static int[] size = { 8, 8 };
-        public static char[,] board = new char[size[0], size[1]];
-        static int x;
-        static int y;
+        static int[] size = { 8, 8 };
+        static char[,] board = new char[size[0], size[1]];
+        static int x = size[0] / 2;
+        static int y = size[1] - 2;
         static int updateRate = 0;
+        static int[] playerPosition = { x, y };
+
         static void Main()
         {
             Console.Clear();
@@ -42,13 +43,14 @@ namespace Game
         static void Play(int width, int height)
         {
             int[] line = { 1, 1 };
-            x = width / 2;
-            y = height - 2;
+            int[] player = { x, y };
+
             while (true)
             {
                 line = FallingLines(line);
                 char[,] board = new char[width, height];
-                board = Board(board, line, x, y);
+                board = Board(board, line, playerPosition);
+                PlayerPosition(playerPosition);
                 StringBuilder renderer = new StringBuilder("");
                 for (int i = 0; i < board.GetLength(1); i++)
                 {
@@ -61,34 +63,37 @@ namespace Game
                 }
                 Console.Clear();
                 Console.WriteLine(renderer);
-                if (Console.KeyAvailable)
-                {
-                    ConsoleKeyInfo userInput = Console.ReadKey();
-                    if (userInput.Key == ConsoleKey.LeftArrow)
-                    {
-                        x--;
-                        if (x < 1) x++;
+                Thread.Sleep(20);
+            }
+        }
 
-                    }
-                    if (userInput.Key == ConsoleKey.RightArrow)
-                    {
-                        x++;
-                        if (x > width - 2) x--;
-                    }
-                    if (userInput.Key == ConsoleKey.UpArrow)
-                    {
-                        y--;
-                        if (y < 1) y++;
-                    }
-                    if (userInput.Key == ConsoleKey.DownArrow)
-                    {
-                        y++;
-                        if (y > height - 2) y--;
-                    }
+        static void PlayerPosition(int[] player)
+        {
+            int[] newPlayerPosition = player;
+            if (Console.KeyAvailable)
+            {
+                ConsoleKeyInfo userInput = Console.ReadKey();
+                if (userInput.Key == ConsoleKey.LeftArrow)
+                {
+                    player[0]--;
+                    if (player[0] < 1) player[0]++;
 
                 }
-
-                Thread.Sleep(20);
+                if (userInput.Key == ConsoleKey.RightArrow)
+                {
+                    player[0]++;
+                    if (player[0] > size[0] - 2) player[0]--;
+                }
+                if (userInput.Key == ConsoleKey.UpArrow)
+                {
+                    player[1]--;
+                    if (player[1] < 1) player[1]++;
+                }
+                if (userInput.Key == ConsoleKey.DownArrow)
+                {
+                    player[1]++;
+                    if (player[1] > size[1] - 2) player[1]--;
+                }
             }
         }
 
@@ -99,7 +104,7 @@ namespace Game
             Console.ReadLine();
         }
 
-        static char[,] Board(char[,] board, int[] line, int x, int y)
+        static char[,] Board(char[,] board, int[] line, int[] playerPosition)
         {
             for (int i = 0; i < board.GetLength(0); i++)
             {
@@ -116,12 +121,14 @@ namespace Game
             }
             for (int i = 1; i < board.GetLength(0) - 1; i++)
             {
-                board[i, line[1]] = '_';
+                board[i, line[1]] = 'X';
             }
             board[line[0], line[1]] = ' ';
-            board[x, y] = '@';
+            board[playerPosition[0], playerPosition[1]] = '@';
             return board;
         }
+
+        static Random rnd = new Random();
 
         static int[] FallingLines(int[] line)
         {
