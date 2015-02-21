@@ -20,7 +20,7 @@ namespace Game
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine("Please choose:");
+                Console.WriteLine("Please choose2:");
                 Console.WriteLine("1. Play");
                 Console.WriteLine("2. Highscores");
                 Console.WriteLine("3. Options");
