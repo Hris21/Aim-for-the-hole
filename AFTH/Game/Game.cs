@@ -9,14 +9,14 @@ namespace Game
 {
     class Game
     {
-        static int[] size = { 8, 8 };
-        static char[,] board = new char[size[0], size[1]];
-        static int x = size[0] / 2;
-        static int y = size[1] - 2;
-        static int updateRate = 0;
-        static int[] playerPosition = { x, y };
+        static int[] size = { 8, 8 }; // size[0] - width; size[1] - height
+        static char[,] board = new char[size[0], size[1]]; //main game board
+        static int x = size[0] / 2; // player x
+        static int y = size[1] - 2; // player y
+        static int updateRate = 0; // The updating rate of the lines position
+        static int[] playerPosition = { x, y }; // Player coordinates
 
-        static void Main()
+        static void Main() //Main menu of the game
         {
             Console.Clear();
 
@@ -40,9 +40,9 @@ namespace Game
             }
         }
 
-        static void Play(int width, int height)
+        static void Play(int width, int height) //Starts the game
         {
-            int[] line = { 1, 1 };
+            int[] line = { 1, 1 }; // line {place of the hole, row of the line}
             int[] player = { x, y };
 
             while (true)
@@ -67,7 +67,7 @@ namespace Game
             }
         }
 
-        static void PlayerPosition(int[] player)
+        static void PlayerPosition(int[] player) //Check for pressed key and changes player position
         {
             int[] newPlayerPosition = player;
             if (Console.KeyAvailable)
@@ -97,14 +97,14 @@ namespace Game
             }
         }
 
-        static void Highscores()
+        static void Highscores() // Menu of the highscores
         {
             Console.Clear();
             Console.WriteLine("Highscores:");
             Console.ReadLine();
         }
 
-        static char[,] Board(char[,] board, int[] line, int[] playerPosition)
+        static char[,] Board(char[,] board, int[] line, int[] playerPosition) //Fills the game board
         {
             for (int i = 0; i < board.GetLength(0); i++)
             {
@@ -130,7 +130,7 @@ namespace Game
 
         static Random rnd = new Random();
 
-        static int[] FallingLines(int[] line)
+        static int[] FallingLines(int[] line) //Creates line position
         {
             if (updateRate == 10)
             {
@@ -147,7 +147,7 @@ namespace Game
             return line;
         }
 
-        static int[] Options(int[] size)
+        static int[] Options(int[] size) //Game configuration options
         {
             while (true)
             {
