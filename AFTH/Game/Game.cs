@@ -39,10 +39,11 @@ namespace Game
 
         static void Play(int width, int height)
         {
-            int[] line = FallingLines();
+            int[] line = { 1, 1 };
 
             while (true)
             {
+                line = FallingLines(line);
                 Console.Clear();
                 char[,] board = new char[width, height];
                 board = Board(board, line);
@@ -54,12 +55,6 @@ namespace Game
                         Console.Write(board[j, i]);
                     }
                     Console.WriteLine();
-                }
-                line[1]++;
-                if (line[1] > size[1] - 2)
-                {
-                    line[1] = 1;
-                    line[0] = rnd.Next(1, size[1] - 2);
                 }
                 Thread.Sleep(1000);
             }
@@ -95,12 +90,14 @@ namespace Game
             return board;
         }
 
-        static int[] FallingLines()
+        static int[] FallingLines(int[] line)
         {
-            //int[] line = { rnd.Next(1, size[0] - 2), 1 };
-            int counter = 1;
-            int[] line = { 3, counter };
-            counter++;
+            line[1]++;
+            if (line[1] > size[1] - 2)
+            {
+                line[1] = 1;
+                line[0] = rnd.Next(1, size[1] - 2);
+            }
             return line;
         }
 
