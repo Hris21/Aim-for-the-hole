@@ -59,7 +59,7 @@ namespace Game
         static void Highscores()
         {
             Console.Clear();
-            Console.WriteLine("Highscores2:");
+            Console.WriteLine("Highscores22:");
             Console.ReadLine();
         }
 
