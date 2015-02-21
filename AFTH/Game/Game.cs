@@ -9,6 +9,7 @@ namespace Game
 {
     class Game
     {
+        static Random rnd = new Random();
         public static int[] size = { 8, 8 };
         public static char[,] board = new char[size[0], size[1]];
 
@@ -38,11 +39,13 @@ namespace Game
 
         static void Play(int width, int height)
         {
+            int[] line = FallingLines();
+
             while (true)
             {
                 Console.Clear();
                 char[,] board = new char[width, height];
-                board = Board(board);
+                board = Board(board, line);
 
                 for (int i = 0; i < board.GetLength(1); i++)
                 {
@@ -51,6 +54,12 @@ namespace Game
                         Console.Write(board[j, i]);
                     }
                     Console.WriteLine();
+                }
+                line[1]++;
+                if (line[1] > size[1] - 2)
+                {
+                    line[1] = 1;
+                    line[0] = rnd.Next(1, size[1] - 2);
                 }
                 Thread.Sleep(1000);
             }
@@ -63,7 +72,7 @@ namespace Game
             Console.ReadLine();
         }
 
-        static char[,] Board(char[,] board)
+        static char[,] Board(char[,] board, int[] line)
         {
             for (int i = 0; i < board.GetLength(0); i++)
             {
@@ -78,7 +87,21 @@ namespace Game
             {
                 board[i, board.GetLength(1) - 1] = '.';
             }
+            for (int i = 1; i < board.GetLength(0) - 1; i++)
+            {
+                board[i, line[1]] = '_';
+            }
+            board[line[0], line[1]] = ' ';
             return board;
+        }
+
+        static int[] FallingLines()
+        {
+            //int[] line = { rnd.Next(1, size[0] - 2), 1 };
+            int counter = 1;
+            int[] line = { 3, counter };
+            counter++;
+            return line;
         }
 
         static int[] Options(int[] size)
