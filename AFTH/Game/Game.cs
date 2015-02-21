@@ -11,7 +11,6 @@ namespace Game
     {
         static void Main()
         {
-            Console.WriteLine();
             Console.Clear();
             int[] size = {8, 8};
             char[,] board = new char[size[0], size[1]];
