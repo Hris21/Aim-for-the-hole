@@ -136,7 +136,7 @@ namespace Game
             Console.Clear();
             Console.WriteLine("Are you sure?");
             Console.WriteLine("1. Yes!");
-            Console.WriteLine("2. No");
+            Console.WriteLine("2. No!");
             Console.Write("Enter choice: ");
             int exitChoice = int.Parse(Console.ReadLine());
             if (exitChoice == 1)
