@@ -23,7 +23,7 @@ namespace Game
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine("Please choose23:");
+                Console.WriteLine("Please choose:");
                 Console.WriteLine("1. Play");
                 Console.WriteLine("2. Highscores");
                 Console.WriteLine("3. Options");
@@ -31,11 +31,21 @@ namespace Game
                 int choice = int.Parse(Console.ReadLine());
                 switch (choice)
                 {
-                    case 1: Play(size[0], size[1]); break;
-                    case 2: Highscores(); break;
-                    case 3: size = Options(size); break;
-                    case 4: ExitConfirm(); break;
-                    default: Console.WriteLine("Invalid input!"); break;
+                    case 1:
+                        Play(size[0], size[1]);
+                        break;
+                    case 2:
+                        Highscores();
+                        break;
+                    case 3:
+                        size = Options(size);
+                        break;
+                    case 4:
+                        ExitConfirm();
+                        break;
+                    default:
+                        Console.WriteLine("Invalid input!");
+                        break;
                 }
             }
         }
@@ -58,7 +68,8 @@ namespace Game
                     {
                         renderer.Append(board[j, i]);
                     }
-                    if (i == 0) renderer.Append("Highscore");
+                    if (i == 0)
+                        renderer.Append("Highscore");
                     renderer.Append("\n");
                 }
                 Console.Clear();
@@ -76,23 +87,27 @@ namespace Game
                 if (userInput.Key == ConsoleKey.LeftArrow)
                 {
                     player[0]--;
-                    if (player[0] < 1) player[0]++;
+                    if (player[0] < 1)
+                        player[0]++;
 
                 }
                 if (userInput.Key == ConsoleKey.RightArrow)
                 {
                     player[0]++;
-                    if (player[0] > size[0] - 2) player[0]--;
+                    if (player[0] > size[0] - 2)
+                        player[0]--;
                 }
                 if (userInput.Key == ConsoleKey.UpArrow)
                 {
                     player[1]--;
-                    if (player[1] < 1) player[1]++;
+                    if (player[1] < 1)
+                        player[1]++;
                 }
                 if (userInput.Key == ConsoleKey.DownArrow)
                 {
                     player[1]++;
-                    if (player[1] > size[1] - 2) player[1]--;
+                    if (player[1] > size[1] - 2)
+                        player[1]--;
                 }
             }
         }
@@ -143,15 +158,24 @@ namespace Game
                 }
                 updateRate = 0;
             }
-            else updateRate++;
+            else
+                updateRate++;
             return line;
         }
 
         static int[] Options(int[] size) //Game configuration options
         {
+            //using to check if not correct data was entered
+            bool isOutOfRange = false;
+
             while (true)
             {
                 Console.Clear();
+                if (isOutOfRange)
+                {
+                    Console.WriteLine("The provided width/height was not correct");
+                }
+
                 Console.WriteLine("Current width: {0}", size[0]);
                 Console.WriteLine("Current height: {0}", size[1]);
                 Console.WriteLine();
@@ -164,11 +188,32 @@ namespace Game
                 Console.Write("Change to: ");
                 if (choice == 1)
                 {
-                    size[0] = int.Parse(Console.ReadLine());
+                    int newWidth = int.Parse(Console.ReadLine());
+                    // checking if the new width is in the range of the console
+                    if (newWidth <= Console.WindowWidth && newWidth >= 0)
+                    {
+                        isOutOfRange = false;
+                        size[0] = newWidth;
+                    }
+                    else
+                    {
+                        isOutOfRange = true;
+                    }
+
                 }
                 else if (choice == 2)
                 {
-                    size[1] = int.Parse(Console.ReadLine());
+                    int newHeight = int.Parse(Console.ReadLine());
+                    // checking if the new height is in the range of the console
+                    if (newHeight <= Console.WindowHeight && newHeight >= 0)
+                    {
+                        isOutOfRange = false;
+                        size[1] = newHeight;
+                    }
+                    else
+                    {
+                        isOutOfRange = true;
+                    }
                 }
                 else if (choice == 3)
                 {
