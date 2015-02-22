@@ -72,6 +72,7 @@ namespace Game
                         renderer.Append("Highscore");
                     renderer.Append("\n");
                 }
+
                 Console.Clear();
                 Console.WriteLine(renderer);
                 Thread.Sleep(20);
@@ -121,25 +122,34 @@ namespace Game
 
         static char[,] Board(char[,] board, int[] line, int[] playerPosition) //Fills the game board
         {
-            for (int i = 0; i < board.GetLength(0); i++)
+            try
             {
-                board[i, 0] = '.';
+                for (int i = 0; i < board.GetLength(0); i++)
+                {
+                    board[i, 0] = '.';
+                }
+                for (int i = 0; i < board.GetLength(1); i++)
+                {
+                    board[0, i] = '.';
+                    board[board.GetLength(0) - 1, i] = '.';
+                }
+                for (int i = 0; i < board.GetLength(0); i++)
+                {
+                    board[i, board.GetLength(1) - 1] = '.';
+                }
+                for (int i = 1; i < board.GetLength(0) - 1; i++)
+                {
+                    board[i, line[1]] = 'X';
+                }
+                board[line[0], line[1]] = ' ';
+                board[playerPosition[0], playerPosition[1]] = '@';
             }
-            for (int i = 0; i < board.GetLength(1); i++)
+            catch (IndexOutOfRangeException)
             {
-                board[0, i] = '.';
-                board[board.GetLength(0) - 1, i] = '.';
+                Console.WriteLine("Your given position is outside the bounds of the game field.");
+                return null;
             }
-            for (int i = 0; i < board.GetLength(0); i++)
-            {
-                board[i, board.GetLength(1) - 1] = '.';
-            }
-            for (int i = 1; i < board.GetLength(0) - 1; i++)
-            {
-                board[i, line[1]] = 'X';
-            }
-            board[line[0], line[1]] = ' ';
-            board[playerPosition[0], playerPosition[1]] = '@';
+
             return board;
         }
 
