@@ -32,24 +32,31 @@ namespace Game
                 Console.WriteLine("2. Highscores");
                 Console.WriteLine("3. Options");
                 Console.WriteLine("4. Exit");
-                int choice = int.Parse(Console.ReadLine());
-                switch (choice)
+                try
                 {
-                    case 1:
-                        Play(size[0], size[1]);
-                        break;
-                    case 2:
-                        Highscores();
-                        break;
-                    case 3:
-                        size = Options(size);
-                        break;
-                    case 4:
-                        ExitConfirm();
-                        break;
-                    default:
-                        Console.WriteLine("Invalid input!");
-                        break;
+                    int choice = int.Parse(Console.ReadLine());
+                    switch (choice)
+                    {
+                        case 1:
+                            Play(size[0], size[1]);
+                            break;
+                        case 2:
+                            Highscores();
+                            break;
+                        case 3:
+                            size = Options(size);
+                            break;
+                        case 4:
+                            ExitConfirm();
+                            break;
+                        default:
+                            Console.WriteLine("Invalid input!");
+                            break;
+                    }
+                }
+                catch (FormatException)
+                {
+                    Console.Clear();
                 }
             }
         }
@@ -239,40 +246,47 @@ namespace Game
                 Console.WriteLine("3. Save");
                 Console.WriteLine();
                 Console.Write("Choice: ");
-                int choice = int.Parse(Console.ReadLine());
-                Console.Write("Change to: ");
-                if (choice == 1)
+                try
                 {
-                    int newWidth = int.Parse(Console.ReadLine());
-                    // checking if the new width is in the range of the console
-                    if (newWidth <= Console.WindowWidth && newWidth >= 0)
+                    int choice = int.Parse(Console.ReadLine());
+                    Console.Write("Change to: ");
+                    if (choice == 1)
                     {
-                        isOutOfRange = false;
-                        size[0] = newWidth;
-                    }
-                    else
-                    {
-                        isOutOfRange = true;
-                    }
+                        int newWidth = int.Parse(Console.ReadLine());
+                        // checking if the new width is in the range of the console
+                        if (newWidth <= Console.WindowWidth && newWidth >= 0)
+                        {
+                            isOutOfRange = false;
+                            size[0] = newWidth;
+                        }
+                        else
+                        {
+                            isOutOfRange = true;
+                        }
 
-                }
-                else if (choice == 2)
-                {
-                    int newHeight = int.Parse(Console.ReadLine());
-                    // checking if the new height is in the range of the console
-                    if (newHeight <= Console.WindowHeight && newHeight >= 0)
-                    {
-                        isOutOfRange = false;
-                        size[1] = newHeight;
                     }
-                    else
+                    else if (choice == 2)
                     {
-                        isOutOfRange = true;
+                        int newHeight = int.Parse(Console.ReadLine());
+                        // checking if the new height is in the range of the console
+                        if (newHeight <= Console.WindowHeight && newHeight >= 0)
+                        {
+                            isOutOfRange = false;
+                            size[1] = newHeight;
+                        }
+                        else
+                        {
+                            isOutOfRange = true;
+                        }
+                    }
+                    else if (choice == 3)
+                    {
+                        return size;
                     }
                 }
-                else if (choice == 3)
+                catch (FormatException)
                 {
-                    return size;
+                    Console.Clear();
                 }
             }
         }
