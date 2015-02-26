@@ -14,6 +14,7 @@ namespace Game
         static int x = size[0] / 2; // player x
         static int y = size[1] - 2; // player y
         static int updateRate = 0; // The updating rate of the lines position
+        static int updateRateBonuses = 0; // The update rate of the bonus points
         static int[] playerPosition = { x, y }; // Player coordinates
         static long currentScore = 0; // The current score of the player
         static int lineHeight = 0;
@@ -83,15 +84,15 @@ namespace Game
                     if (i == size[1] / 2)
                     {
                         if (gameNotOver)
-                        {
+                        { 
                             renderer.Append("  Score: "); // Draws the score
                             renderer.Append(currentScore);
                         }
                         else
-                        {
+	                    {
                             Console.ForegroundColor = ConsoleColor.Red;
                             renderer.Append("  GAME OVER!!!"); // Game over message
-                        }
+	                    }
                     }
                     renderer.Append("\n");
                 }
@@ -150,7 +151,7 @@ namespace Game
             Console.WriteLine("Highscores:");
             Console.ReadLine();
         }
-
+        
         static char[,] Board(char[,] board, int[] line, int[] playerPosition, int[] bonusPosition) //Fills the game board
         {
             try
@@ -208,8 +209,7 @@ namespace Game
 
         static int[] BonusPosition(int[] bonusPosition) // Returns the position of bonus points
         {
-            board[bonusPosition[0], bonusPosition[1]] = '+';
-            if (updateRate == 10)
+            if (updateRateBonuses == 10)
             {
                 bonusPosition[1]++;
                 if (bonusPosition[1] > size[1] - 2)
@@ -217,11 +217,10 @@ namespace Game
                     bonusPosition[1] = 1;
                     bonusPosition[0] = rnd.Next(1, size[1] - 2);
                 }
-                updateRate = 0;
+                updateRateBonuses = 0;
             }
             else
-                updateRate++;
-
+                updateRateBonuses++;
             return bonusPosition;
         }
 
