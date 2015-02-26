@@ -18,7 +18,7 @@ namespace Game
         static long currentScore = 0; // The current score of the player
         static int lineHeight = 0;
         static bool gameNotOver = true; // Checks if the game is over - Tosho use this variable to switch it to false if it is over
-        static int[] bonusPosition = {1, 1};
+        static int[] bonusPosition = {1, 4 };
 
         static void Main() //Main menu of the game
         {
@@ -83,15 +83,15 @@ namespace Game
                     if (i == size[1] / 2)
                     {
                         if (gameNotOver)
-                        { 
+                        {
                             renderer.Append("  Score: "); // Draws the score
                             renderer.Append(currentScore);
                         }
                         else
-	                    {
+                        {
                             Console.ForegroundColor = ConsoleColor.Red;
                             renderer.Append("  GAME OVER!!!"); // Game over message
-	                    }
+                        }
                     }
                     renderer.Append("\n");
                 }
@@ -150,7 +150,7 @@ namespace Game
             Console.WriteLine("Highscores:");
             Console.ReadLine();
         }
-        
+
         static char[,] Board(char[,] board, int[] line, int[] playerPosition, int[] bonusPosition) //Fills the game board
         {
             try
@@ -221,6 +221,7 @@ namespace Game
             }
             else
                 updateRate++;
+
             return bonusPosition;
         }
 
