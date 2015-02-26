@@ -15,6 +15,10 @@ namespace Game
         static int y = size[1] - 2; // player y
         static int updateRate = 0; // The updating rate of the lines position
         static int[] playerPosition = { x, y }; // Player coordinates
+        static long currentScore = 0; // The current score of the player
+        static int lineHeight = 0;
+        static bool gameNotOver = true; // Checks if the game is over - Tosho use this variable to switch it to false if it is over
+        static int[] bonusPosition = {1, 1};
 
         static void Main() //Main menu of the game
         {
@@ -58,8 +62,9 @@ namespace Game
             while (true)
             {
                 line = FallingLines(line);
+                bonusPosition = BonusPosition(bonusPosition);
                 char[,] board = new char[width, height];
-                board = Board(board, line, playerPosition);
+                board = Board(board, line, playerPosition, bonusPosition);
                 PlayerPosition(playerPosition);
                 StringBuilder renderer = new StringBuilder("");
                 for (int i = 0; i < board.GetLength(1); i++)
@@ -68,8 +73,19 @@ namespace Game
                     {
                         renderer.Append(board[j, i]);
                     }
-                    if (i == 0)
-                        renderer.Append("Highscore");
+                    if (i == size[1] / 2)
+                    {
+                        if (gameNotOver)
+                        { 
+                            renderer.Append("  Score: "); // Draws the score
+                            renderer.Append(currentScore);
+                        }
+                        else
+	                    {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            renderer.Append("  GAME OVER!!!"); // Game over message
+	                    }
+                    }
                     renderer.Append("\n");
                 }
 
@@ -111,6 +127,14 @@ namespace Game
                         player[1]--;
                 }
             }
+            if (player[1] == lineHeight) // Check the position of the player according to the line 
+            {
+                currentScore++;
+            }
+            if (player[0] == bonusPosition[0] && player[1] == bonusPosition[1]) // Update score when hitted bonus position
+            {
+                currentScore += 10;
+            }
         }
 
         static void Highscores() // Menu of the highscores
@@ -119,8 +143,8 @@ namespace Game
             Console.WriteLine("Highscores:");
             Console.ReadLine();
         }
-
-        static char[,] Board(char[,] board, int[] line, int[] playerPosition) //Fills the game board
+        
+        static char[,] Board(char[,] board, int[] line, int[] playerPosition, int[] bonusPosition) //Fills the game board
         {
             try
             {
@@ -143,6 +167,8 @@ namespace Game
                 }
                 board[line[0], line[1]] = ' ';
                 board[playerPosition[0], playerPosition[1]] = '@';
+                board[bonusPosition[0], bonusPosition[1]] = '+';
+                lineHeight = line[1]; // Check the position of the player according to the line 
             }
             catch (IndexOutOfRangeException)
             {
@@ -172,6 +198,25 @@ namespace Game
                 updateRate++;
             return line;
         }
+
+        static int[] BonusPosition(int[] bonusPosition) // Returns the position of bonus points
+        {
+            board[bonusPosition[0], bonusPosition[1]] = '+';
+            if (updateRate == 10)
+            {
+                bonusPosition[1]++;
+                if (bonusPosition[1] > size[1] - 2)
+                {
+                    bonusPosition[1] = 1;
+                    bonusPosition[0] = rnd.Next(1, size[1] - 2);
+                }
+                updateRate = 0;
+            }
+            else
+                updateRate++;
+            return bonusPosition;
+        }
+
 
         static int[] Options(int[] size) //Game configuration options
         {
