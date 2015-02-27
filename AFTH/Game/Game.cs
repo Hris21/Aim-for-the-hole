@@ -20,7 +20,7 @@ namespace Game
         static long currentScore = 0; // The current score of the player
         static int lineHeight = 0; // Line position according to the player
         static bool gameNotOver = true; // Checks if the game is over - Tosho use this variable to switch it to false if it is over
-        static int[] bonusPosition = {1, 4}; // Position of the bonus
+        static int[] bonusPosition = {1, size[1] / 2}; // Position of the bonus
 
         static void Main() //Main menu of the game
         {
@@ -225,7 +225,6 @@ namespace Game
             return bonusPosition;
         }
 
-
         static int[] Options(int[] size) //Game configuration options
         {
             //using to check if not correct data was entered
@@ -286,6 +285,7 @@ namespace Game
                         y = size[1] - 2;
                         playerPosition[0] = x;
                         playerPosition[1] = y;
+                        bonusPosition[1] = size[1] / 2;
                         return size;
                     }
                 }
