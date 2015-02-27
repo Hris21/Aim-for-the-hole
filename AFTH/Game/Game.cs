@@ -13,8 +13,9 @@ namespace Game
         static char[,] board = new char[size[0], size[1]]; //main game board
         static int x = size[0] / 2; // player x
         static int y = size[1] - 2; // player y
-        static int updateRate = 0; // The updating rate of the lines position
-        static int updateRateBonuses = 0; // The update rate of the bonus points
+        static int updateRate = 10; // The rate of update of lines and bonuses
+        static int updateLineCount = 0; //update counter for the lines
+        static int updateBonusesCount = 0; //update counter of the bonus points
         static int[] playerPosition = { x, y }; // Player coordinates
         static long currentScore = 0; // The current score of the player
         static int lineHeight = 0;
@@ -191,7 +192,7 @@ namespace Game
 
         static int[] FallingLines(int[] line) //Creates line position
         {
-            if (updateRate == 10)
+            if (updateLineCount == updateRate)
             {
 
                 line[1]++;
@@ -200,16 +201,16 @@ namespace Game
                     line[1] = 1;
                     line[0] = rnd.Next(1, size[1] - 2);
                 }
-                updateRate = 0;
+                updateLineCount = 0;
             }
             else
-                updateRate++;
+                updateLineCount++;
             return line;
         }
 
         static int[] BonusPosition(int[] bonusPosition) // Returns the position of bonus points
         {
-            if (updateRateBonuses == 10)
+            if (updateBonusesCount == updateRate)
             {
                 bonusPosition[1]++;
                 if (bonusPosition[1] > size[1] - 2)
@@ -217,10 +218,10 @@ namespace Game
                     bonusPosition[1] = 1;
                     bonusPosition[0] = rnd.Next(1, size[1] - 2);
                 }
-                updateRateBonuses = 0;
+                updateBonusesCount = 0;
             }
             else
-                updateRateBonuses++;
+                updateBonusesCount++;
             return bonusPosition;
         }
 
