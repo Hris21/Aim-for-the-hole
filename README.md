@@ -3,7 +3,7 @@ We are the best.
 
 Documentation date update 27/02/2015
 
-This is the documentation for the game Aim For The Hole - chose by consensus between the programmers and the leader.
+This is the documentation for the game Aim For The Hole - chosen by consensus between the programmers and the leader.
 The project main idea and task is, a game to be made from different people working as a team.
 In this program the following people have taken part: 
 Y.Maltsiev(Яни Малцев), shunobaka(Веселин Минев), veselints(Веселин Цветанов), yordansg(Йордан Георгиев), kabumko(Теодор Архондаки), success(Христо Кокалов), toshocorp(Тодор Павлов), Hristiyan_Andre(Християн Андреев).
