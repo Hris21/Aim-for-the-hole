@@ -102,11 +102,11 @@ At least 2 exception handlings!
 
 5.1
 
-First exeption!!!
+First exeption is in case wrong parameters for the player are somehow pressent, then an error occurs that says that you cant make thes player go out of the field.
 
 5.2
 
-Second exeption!!!
+Second exeption is in the board, in case the parameters for the field does not make a good field, you get a error that the size for the border is incorrect for the game.
 
 At least 1 use of external text file!
 
@@ -122,3 +122,10 @@ Y.Maltsiev(Яни Малциев) has taken part in programming the player. - Pl
 
 toshocorp(Тодор Павлов)'s part was to make the player die on collision. - Player and obstacles synchro mainly.
 
+shunobaka(Веселин Минев) contributed by making the score system.
+
+veselints(Веселин Цветанов) is our team leader which made the group for communication between the programmers, and overwatchs the job progress, may have some code responsible.
+
+Hristiyan_Andre(Християн Андреев) made the exception handling in the program.
+
+kabumko(Теодор Архондаки) documentation and scaling difficulty of the game.
