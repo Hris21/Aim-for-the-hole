@@ -8,6 +8,8 @@ The project main idea and task is, a game to be made from different people worki
 In this program the following people have taken part: 
 Y.Maltsiev(Яни Малцев), shunobaka(Веселин Минев), veselints(Веселин Цветанов), yordansg(Йордан Георгиев), kabumko(Теодор Архондаки), success(Христо Кокалов), toshocorp(Тодор Павлов), Hristiyan_Andre(Християн Андреев).
 
+--------------------------------------------------------------------------------
+
 Generral rules for the game are:
 
 To have 1 or more multy-dimensional arrays!
@@ -85,4 +87,38 @@ ExitConfirm method - a method with which the user should be able to quit the pro
 At least 3 existing .Net Classes!
 
 4.1
+
+Class 1
+
+4.2
+
+Class 2
+
+4.3
+
+Class 3
+
+At least 2 exception handlings!
+
+5.1
+
+First exeption!!!
+
+5.2
+
+Second exeption!!!
+
+At least 1 use of external text file!
+
+6
+
+Text file
+
+--------------------------------------------------------------------------------
+
+Work by people:
+
+Y.Maltsiev(Яни Малциев) has taken part in programming the player. - Player cordinates and synchronisation and fixes on it.
+
+toshocorp(Тодор Павлов)'s part was to make the player die on collision. - Player and obstacles synchro mainly.
 
