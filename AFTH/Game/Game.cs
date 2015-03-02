@@ -4,11 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
+using System.IO;
 
 namespace Game
 {
     class Game
     {
+        const string highScoresFile = "HighScores.txt";
         static int[] size = { 8, 8 }; // size[0] - width; size[1] - height
         static char[,] board = new char[size[0], size[1]]; //main game board
         static int x = size[0] / 2; // player x
@@ -149,7 +151,9 @@ namespace Game
         static void Highscores() // Menu of the highscores
         {
             Console.Clear();
-            Console.WriteLine("Highscores:push");
+            Console.WriteLine("Highscores:");
+            //WriteScores();
+            ReadScores();
             Console.ReadLine();
         }
         
@@ -312,6 +316,62 @@ namespace Game
             {
                 return;
             }
+        }
+
+        public static void WriteScores()
+        {
+            const int maxRecordedScores = 10;
+            //currentScore = 300;
+            List<long> highScores = GetHighScores();
+            if (highScores.Count < maxRecordedScores || currentScore > highScores.Last())
+            {
+                highScores.Add(currentScore);
+                highScores.Sort();
+                highScores.Reverse();
+
+                if (highScores.Count > maxRecordedScores)
+                {
+                    highScores.RemoveAt(highScores.Count - 1);
+                }
+
+                using (System.IO.StreamWriter file =
+                    new System.IO.StreamWriter(File.Open(highScoresFile, FileMode.OpenOrCreate)))
+                {
+                    foreach (var item in highScores)
+                    {
+                        file.WriteLine(item);
+                    }
+                }
+            }
+
+        }
+
+        public static void ReadScores()
+        {
+            List<long> highScores = GetHighScores();
+            int count = 1;
+            foreach (var item in highScores)
+            {
+                Console.WriteLine(string.Format("{0}. {1}", count, item));
+                count++;
+            }
+        }
+
+
+        public static List<long> GetHighScores()
+        {
+            string line;
+            List<long> highScores = new List<long>();
+            using (System.IO.StreamReader file =
+                new System.IO.StreamReader(File.Open(highScoresFile, FileMode.OpenOrCreate)))
+            {
+                while ((line = file.ReadLine()) != null)
+                {
+
+                    highScores.Add(long.Parse(line));
+                }
+            }
+            return highScores;
         }
     }
 }
