@@ -1,16 +1,15 @@
 # Aim-for-the-hole
-We are the best.
 
 Documentation date update 27/02/2015
 
 This is the documentation for the game Aim For The Hole - chosen by consensus between the programmers and the leader.
-The project main idea and task is, a game to be made from different people working as a team.
+The project main goal was to to put the combined efforts of all the members, thus resulting in great teamwork and results.
 In this program the following people have taken part: 
-Y.Maltsiev(Яни Малцев), shunobaka(Веселин Минев), veselints(Веселин Цветанов), yordansg(Йордан Георгиев), kabumko(Теодор Архондаки), success(Христо Кокалов), toshocorp(Тодор Павлов), Hristiyan_Andre(Християн Андреев).
+Y.Maltsiev(Яни Малцев), shunobaka(Веселин Минев), veselints(Веселин Цветанов), yordansg(Йордан Георгиев), kabumko(Теодор Архондаки), success(Христо Кокалов), toshocorp(Тодор Павлов), Hristiyan_Andreev(Християн Андреев).
 
 --------------------------------------------------------------------------------
 
-Generral rules for the game are:
+General rules for the game are:
 
 To have 1 or more multy-dimensional arrays!
 
@@ -68,7 +67,7 @@ Board methos - you already have heard what it does.
 
 3.6
 
-FallingLines method - makes the obstacles line, holds coordinates, and makes them go down the board. Just like PlayerPosition.
+FallingLines method - makes the obstacles line, holds coordinates, and makes them fall down the board. Just like PlayerPosition.
 
 3.7
 
@@ -102,11 +101,11 @@ At least 2 exception handlings!
 
 5.1
 
-First exeption is in case wrong parameters for the player are somehow pressent, then an error occurs that says that you cant make thes player go out of the field.
+The first exeption is in case wrong parameters for the player are somehow pressent, then an error occurs that says that you cant make the character go out of the field.
 
 5.2
 
-Second exeption is in the board, in case the parameters for the field does not make a good field, you get a error that the size for the border is incorrect for the game.
+Second exeption is in the board, in case the parameters for the field does are not set for a proper size of the field, you get an error which tell syou that the size for the border is incorrect for the game.
 
 At least 1 use of external text file!
 
@@ -122,11 +121,11 @@ Y.Maltsiev(Яни Малциев) has taken part in programming the player. - Pl
 
 toshocorp(Тодор Павлов)'s part was to make the player die on collision. - Player and obstacles synchro mainly.
 
-shunobaka(Веселин Минев) contributed by making the score system.
+shunobaka(Веселин Минев) contributed by making the functionality of the menu and the score system .
 
-veselints(Веселин Цветанов) is our team leader which made the group for communication between the programmers, and overwatchs the job progress, may have some code responsible.
+veselints(Веселин Цветанов) is our team leader which used ways of skillful communication to distributed the roles btween the team members, he made the in game feature "bonus", which gives extra points if caught.
 
-Hristiyan_Andreev(Християн Андреев) made the exception handling in the program and did some cosmetic upgrades.
+Hristiyan_Andreev(Християн Андреев) made the exception handling in the program and cosmetic upgrades.
 
 kabumko(Теодор Архондаки) documentation and scaling difficulty of the game.
 
