@@ -149,7 +149,7 @@ namespace Game
         static void Highscores() // Menu of the highscores
         {
             Console.Clear();
-            Console.WriteLine("Highscores:");
+            Console.WriteLine("Highscores:push");
             Console.ReadLine();
         }
         
