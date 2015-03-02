@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using System.IO;
 
+
 namespace Game
 {
     class Game
@@ -22,7 +23,7 @@ namespace Game
         static long currentScore = 0; // The current score of the player
         static int lineHeight = 0; // Line position according to the player
         static bool gameNotOver = true; // Checks if the game is over - Tosho use this variable to switch it to false if it is over
-        static int[] bonusPosition = {1, size[1] / 2}; // Position of the bonus
+        static int[] bonusPosition = { 1, size[1] / 2 }; // Position of the bonus
 
         static void Main() //Main menu of the game
         {
@@ -30,27 +31,74 @@ namespace Game
 
             while (true)
             {
-                Console.Clear();
-                Console.WriteLine("Please choose:");
-                Console.WriteLine("1. Play");
-                Console.WriteLine("2. Highscores");
-                Console.WriteLine("3. Options");
-                Console.WriteLine("4. Exit");
+                Console.Clear();         
+                for (int i = 0; i < 5; i++)                //If this for was missing
+                {
+                    Console.WriteLine();
+                }
+
+                Console.WriteLine(String.Format("{0," + Console.WindowWidth / 2 + "}", "Play"));        //Using basic formating, to be sure that everything is..
+                Console.WriteLine();                                                                    //..in the center.
+                Console.WriteLine(String.Format("{0," + Console.WindowWidth / 2 + "}", "Highscores"));
+                Console.WriteLine();
+                Console.WriteLine(String.Format("{0," + Console.WindowWidth / 2 + "}", "Options"));
+                Console.WriteLine();
+                Console.WriteLine(String.Format("{0," + Console.WindowWidth / 2 + "}", "Exit"));
+                int startCol = 43;  int positionUpDown = 5;  //I just had to guess the right cordinates for the pointer.I've written them on one row so you know that these are the coordinates.
+                char arrowForMenu = (char)17; //The arrow for the menu.
+                while (true)
+                {
+                    Console.CursorVisible = false; //This here is making sure that the arrow wont be flashin
+                    Console.SetCursorPosition(startCol, positionUpDown);
+                    Console.WriteLine(arrowForMenu);
+                    Console.SetCursorPosition(startCol, positionUpDown);
+                    ConsoleKeyInfo MenuArrowPosition = Console.ReadKey();
+                    if (positionUpDown > 5 || positionUpDown <= 12)
+                    {
+
+                        if (MenuArrowPosition.Key == ConsoleKey.UpArrow)              //If up arrow is pressed the pointer goes down.
+                        {
+                            Console.SetCursorPosition(startCol, positionUpDown);
+                            Console.WriteLine(" ");
+
+                            positionUpDown -= 2;
+                        }
+                        else if (MenuArrowPosition.Key == ConsoleKey.DownArrow)       //If down arrow is pressed the pointer goes down.
+                        {
+                            Console.SetCursorPosition(startCol, positionUpDown);
+                            Console.WriteLine(" ");
+                            positionUpDown += 2;
+                        }
+                    }
+                    if (positionUpDown < 5)  //Making sure that the arrow will not get too high.
+                    {
+                        positionUpDown = 11;
+                    }
+                    if (positionUpDown > 12) //Making sure that the arrow will not get too low.
+                    {
+                        positionUpDown = 5;
+                    }
+                    if (MenuArrowPosition.Key == ConsoleKey.Enter)   //This break here is making sure that we break to switch .
+                    {
+                        break;
+                    }
+                }
+
                 try
                 {
-                    int choice = int.Parse(Console.ReadLine());
-                    switch (choice)
+
+                    switch (positionUpDown - 4)            
                     {
                         case 1:
                             Play(size[0], size[1]);
                             break;
-                        case 2:
+                        case 3:
                             Highscores();
                             break;
-                        case 3:
+                        case 5:
                             size = Options(size);
                             break;
-                        case 4:
+                        case 7:
                             ExitConfirm();
                             break;
                         default:
@@ -87,15 +135,15 @@ namespace Game
                     if (i == size[1] / 2)
                     {
                         if (gameNotOver)
-                        { 
+                        {
                             renderer.Append("  Score: "); // Draws the score
                             renderer.Append(currentScore);
                         }
                         else
-	                    {
+                        {
                             Console.ForegroundColor = ConsoleColor.Red;
                             renderer.Append("  GAME OVER!!!"); // Game over message
-	                    }
+                        }
                     }
                     renderer.Append("\n");
                 }
@@ -156,9 +204,10 @@ namespace Game
             ReadScores();
             Console.ReadLine();
         }
-        
+
         static char[,] Board(char[,] board, int[] line, int[] playerPosition, int[] bonusPosition) //Fills the game board
-        {
+        {  
+            char characterFace = (char)1;
             try
             {
                 for (int i = 0; i < board.GetLength(0); i++)
@@ -179,7 +228,7 @@ namespace Game
                     board[i, line[1]] = 'X';
                 }
                 board[line[0], line[1]] = ' ';
-                board[playerPosition[0], playerPosition[1]] = '@';
+                board[playerPosition[0], playerPosition[1]] = characterFace;
                 board[bonusPosition[0], bonusPosition[1]] = '+';
                 lineHeight = line[1]; // Check the position of the player according to the line 
             }
