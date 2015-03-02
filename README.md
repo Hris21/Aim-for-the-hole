@@ -129,3 +129,5 @@ veselints(Веселин Цветанов) is our team leader which made the gro
 Hristiyan_Andre(Християн Андреев) made the exception handling in the program.
 
 kabumko(Теодор Архондаки) documentation and scaling difficulty of the game.
+
+yordansg(Йордан Георгиев) has programmed the input and output of the text file for the highscores.
