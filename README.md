@@ -126,7 +126,7 @@ shunobaka(Веселин Минев) contributed by making the score system.
 
 veselints(Веселин Цветанов) is our team leader which made the group for communication between the programmers, and overwatchs the job progress, may have some code responsible.
 
-Hristiyan_Andre(Християн Андреев) made the exception handling in the program.
+Hristiyan_Andreev(Християн Андреев) made the exception handling in the program and did some cosmetic upgrades.
 
 kabumko(Теодор Архондаки) documentation and scaling difficulty of the game.
 
