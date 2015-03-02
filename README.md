@@ -123,7 +123,7 @@ toshocorp(Тодор Павлов)'s part was to make the player die on collisio
 
 shunobaka(Веселин Минев) contributed by making the functionality of the menu and the score system .
 
-veselints(Веселин Цветанов) is our team leader which used ways of skillful communication to distributed the roles btween the team members, he made the in game feature "bonus", which gives extra points if caught.
+veselints(Веселин Цветанов) is our team leader which used ways of skillful communication to distributed the roles between the team members, he made the in game feature "bonus", which gives extra points if caught.
 
 Hristiyan_Andreev(Християн Андреев) made the exception handling in the program and cosmetic upgrades.
 
