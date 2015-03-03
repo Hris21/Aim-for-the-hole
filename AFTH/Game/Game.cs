@@ -37,6 +37,7 @@ namespace Game
 
             while (true)
             {
+                ResetGame();
                 Console.Clear();
                 for (int i = 0; i < 5; i++)                //If this for was missing
                 {
@@ -139,7 +140,10 @@ namespace Game
                     for (int j = 0; j < board.GetLength(0); j++)
                     {
                         renderer.Append(board[j, i]);
+
                     }
+
+
                     if (i == size[1] / 2 - 1)
                     {
                         if (gameNotOver)
@@ -152,6 +156,7 @@ namespace Game
                             Console.ForegroundColor = ConsoleColor.Red;
                             renderer.Append("  GAME OVER!!!"); // Game over message
                         }
+
                     }
                     if (i == size[1] / 2 + 1)
                     {
@@ -162,12 +167,22 @@ namespace Game
                         }
                     }
                     renderer.Append("\n");
+                    if (gameNotOver == false) { Console.ReadKey(); return; }
+
                 }
+               
+
 
                 Console.Clear();
                 Console.WriteLine(renderer);
+                if (gameNotOver == false)
+                {
+                    Console.ReadKey();
+                    return;
+                }
                 Thread.Sleep(20);
             }
+            
         }
 
         static void PlayerPosition(int[] player) //Check for pressed key and changes player position
@@ -258,8 +273,7 @@ namespace Game
                 if (playerPosition[1] == line[1] && playerPosition[0] != line[0]) //The death
                 {
                     gameNotOver = false;
-                    Console.ReadKey();
-                }
+                 }
             }
             catch (IndexOutOfRangeException)
             {
@@ -460,6 +474,24 @@ namespace Game
                 level = 5;
             }
             updateRate = 10 - level;
+        }
+        static void ResetGame()
+        {
+            board = new char[size[0], size[1]];
+            x = size[0] / 2;
+            y = size[1] - 2;
+            updateRate = 10;
+            updateLineCount = 0;
+            updateBonusesCount = 0;
+            playerPosition[0] = x;
+            playerPosition[1] = y;
+            currentScore = 0;
+            lineHeight = 0;
+            gameNotOver = true;
+            bonusPosition[1] = size[1] / 2;
+            bonusPosition[0] = 1;
+            level = 0;
+            bonusSymbol = '+';
         }
     }
 }
