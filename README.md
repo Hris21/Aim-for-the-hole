@@ -1,4 +1,4 @@
-# Aim-for-the-hole
+﻿# Aim-for-the-hole
 
 Documentation date update 27/02/2015
 
@@ -16,7 +16,7 @@ To have 1 or more multy-dimensional arrays!
 1
 
 We have 1 multy-dimensional char array called board, which is used to visualize our play-field border.
-The board stars as a field of 8 by 8.
+The board stars as a field of 35 by 20.
 The array is used in the Border method which sets the char value to a symbol that represents the field.
 The Border method also sets the first initiation of the line that is supposed to kill the hero, and the heros position. 
 
@@ -31,8 +31,8 @@ It is used in the Options method to set size for the border as we said before, a
 
 2.2
 
-The playerPossition array is the the one that saves the values of that where the player is located on the board.
-It is used to set the board trough the Board method, and in the PlayerPosition method.
+The playerPossition array is the one that saves the values of that where the player is located on the board.
+It is used to set the board through the Board method, and in the PlayerPosition method.
 In PlayerPosition method it is used to move the player depending on the buttons pressed in the correct direction if possible.
 It is used in the options analogically as size array. One changes the other too.
 
@@ -63,7 +63,7 @@ Highscores method saves the score of the game and prints the result
 
 3.5
 
-Board methos - you already have heard what it does.
+Board methods - you already have heard what it does.
 
 3.6
 
