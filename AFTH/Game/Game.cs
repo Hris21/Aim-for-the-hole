@@ -5,19 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using System.IO;
-using System.Globalization;
+
 
 namespace Game
 {
     class Game
     {
-<<<<<<< HEAD
         const string highScoresFile = "HighScores.txt";
-        static int[] size = { 35, 20 }; // size[0] - width; size[1] - height
-=======
-        const string highScoresFile = @"..\..\HighScores.txt";
         static int[] size = { 8, 8 }; // size[0] - width; size[1] - height
->>>>>>> 8836387d35de0ba4752524853d196dc4f524a890
         static char[,] board = new char[size[0], size[1]]; //main game board
         static int x = size[0] / 2; // player x
         static int y = size[1] - 2; // player y
@@ -36,7 +31,7 @@ namespace Game
 
             while (true)
             {
-                Console.Clear();
+                Console.Clear();         
                 for (int i = 0; i < 5; i++)                //If this for was missing
                 {
                     Console.WriteLine();
@@ -49,10 +44,7 @@ namespace Game
                 Console.WriteLine(String.Format("{0," + Console.WindowWidth / 2 + "}", "Options"));
                 Console.WriteLine();
                 Console.WriteLine(String.Format("{0," + Console.WindowWidth / 2 + "}", "Exit"));
-
-                int startCol = 43;
-                int positionUpDown = 5;  //I just had to guess the right cordinates for the pointer.I've written them on one row so you know that these are the coordinates.
-
+                int startCol = 43;  int positionUpDown = 5;  //I just had to guess the right cordinates for the pointer.I've written them on one row so you know that these are the coordinates.
                 char arrowForMenu = (char)17; //The arrow for the menu.
                 while (true)
                 {
@@ -95,7 +87,7 @@ namespace Game
                 try
                 {
 
-                    switch (positionUpDown - 4)
+                    switch (positionUpDown - 4)            
                     {
                         case 1:
                             Play(size[0], size[1]);
@@ -214,11 +206,8 @@ namespace Game
         }
 
         static char[,] Board(char[,] board, int[] line, int[] playerPosition, int[] bonusPosition) //Fills the game board
-        {
-            Console.OutputEncoding = System.Text.Encoding.UTF8;
-
-            char characterForLines = 'X'; //  the character for the lines.
-            char characterFace = (char)1;      //the character for the player face.
+        {  
+            char characterFace = (char)1;
             try
             {
                 for (int i = 0; i < board.GetLength(0); i++)
@@ -236,7 +225,7 @@ namespace Game
                 }
                 for (int i = 1; i < board.GetLength(0) - 1; i++)
                 {
-                    board[i, line[1]] = characterForLines;
+                    board[i, line[1]] = 'X';
                 }
                 board[line[0], line[1]] = ' ';
                 board[playerPosition[0], playerPosition[1]] = characterFace;
