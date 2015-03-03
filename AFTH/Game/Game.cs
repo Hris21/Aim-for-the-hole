@@ -38,6 +38,7 @@ namespace Game
             while (true)
             {
                 ResetGame();
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.Clear();
                 for (int i = 0; i < 5; i++)                //If this for was missing
                 {
@@ -175,6 +176,7 @@ namespace Game
                 Console.WriteLine(renderer);
                 if (gameNotOver == false)
                 {
+                    WriteScores();
                     Console.ReadKey();
                     return;
                 }
