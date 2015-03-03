@@ -255,7 +255,7 @@ namespace Game
                 board[playerPosition[0], playerPosition[1]] = characterFace;
                 board[bonusPosition[0], bonusPosition[1]] = bonusSymbol;
                 lineHeight = line[1]; // Check the position of the player according to the line
-                if (playerPosition[1] <= line[1] && playerPosition[0] != line[0]) //The death
+                if (playerPosition[1] == line[1] && playerPosition[0] != line[0]) //The death
                 {
                     gameNotOver = false;
                     Console.ReadKey();
