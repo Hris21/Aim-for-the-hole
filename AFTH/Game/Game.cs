@@ -29,6 +29,9 @@ namespace Game
 
         static void Main() //Main menu of the game
         {
+            Console.BufferHeight = Console.WindowHeight; //remove the buffer (scrollbar)
+            Console.BufferWidth = Console.WindowWidth; 
+
             Console.Title = "Aim For The Hole";
             Console.Clear();
 
@@ -251,7 +254,12 @@ namespace Game
                 board[line[0], line[1]] = ' ';
                 board[playerPosition[0], playerPosition[1]] = characterFace;
                 board[bonusPosition[0], bonusPosition[1]] = bonusSymbol;
-                lineHeight = line[1]; // Check the position of the player according to the line 
+                lineHeight = line[1]; // Check the position of the player according to the line
+                if (playerPosition[1] <= line[1] && playerPosition[0] != line[0]) //The death
+                {
+                    gameNotOver = false;
+                    Console.ReadKey();
+                }
             }
             catch (IndexOutOfRangeException)
             {
