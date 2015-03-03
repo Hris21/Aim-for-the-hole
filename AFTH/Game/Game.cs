@@ -151,13 +151,18 @@ namespace Game
                         {
                             renderer.Append("  Score: "); // Draws the score
                             renderer.Append(currentScore);
+
                         }
                         else
                         {
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            renderer.Append("  GAME OVER!!!"); // Game over message
+                            renderer.Append("  Final score: ");
+                            renderer.Append(currentScore);
                         }
-
+                    }
+                    if ((i == size[1] / 2) && gameNotOver == false)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        renderer.Append("  GAME OVER! ");
                     }
                     if (i == size[1] / 2 + 1)
                     {
@@ -165,6 +170,10 @@ namespace Game
                         {
                             renderer.Append("  Level: "); // Draws the level
                             renderer.Append(level);
+                        }
+                        else
+                        {
+                            renderer.Append("  Press enter to continue... ");
                         }
                     }
                     renderer.Append("\n");
