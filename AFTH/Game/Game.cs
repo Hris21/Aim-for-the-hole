@@ -11,7 +11,7 @@ namespace Game
 {
     class Game
     {
-        const string highScoresFile = @"..\..\HighScores.txt";
+        const string highScoresFile = @"..\..\HighScores.txt"; // The directory of the external highscores file
         static int[] size = { 35, 20 }; // size[0] - width; size[1] - height
         static char[,] board = new char[size[0], size[1]]; //main game board
         static int x = size[0] / 2; // player x
@@ -231,13 +231,6 @@ namespace Game
             {
                 bonusSymbol = ' ';
                 currentScore += 10;
-                //bonusPosition[1] = 1; // Removes the bonus from the board and initilizes a new bonus ot the top of the field
-                //bonusPosition[0] = rnd.Next(1, size[0] - 2);
-                //if (bonusPosition[1] == lineHeight)
-                //{
-                //    bonusPosition[1]--;
-                //}
-
             }
         }
 
@@ -245,8 +238,13 @@ namespace Game
         {
             Console.Clear();
             Console.WriteLine("Highscores:");
-            //WriteScores();
-            ReadScores();
+            List<long> highScores = GetHighScores();
+            int count = 1;
+            foreach (var item in highScores)
+            {
+                Console.WriteLine(string.Format("{0}. {1}", count, item));
+                count++;
+            }
             Console.ReadLine();
         }
 
@@ -399,7 +397,7 @@ namespace Game
             }
         }
 
-        static void ExitConfirm()
+        static void ExitConfirm() //Asks the player if he's sure he wants to quit
         {
             Console.Clear();
             Console.WriteLine("Are you sure?");
@@ -417,10 +415,9 @@ namespace Game
             }
         }
 
-        public static void WriteScores()
+        public static void WriteScores() //When the highscores change, writes them in the external file
         {
             const int maxRecordedScores = 10;
-            //currentScore = 300;
             List<long> highScores = GetHighScores();
             if (highScores.Count < maxRecordedScores || currentScore > highScores.Last())
             {
@@ -445,18 +442,7 @@ namespace Game
 
         }
 
-        public static void ReadScores()
-        {
-            List<long> highScores = GetHighScores();
-            int count = 1;
-            foreach (var item in highScores)
-            {
-                Console.WriteLine(string.Format("{0}. {1}", count, item));
-                count++;
-            }
-        }
-
-        public static List<long> GetHighScores()
+        public static List<long> GetHighScores() //Used to read the highscores from the external file
         {
             string line;
             List<long> highScores = new List<long>();
@@ -472,7 +458,7 @@ namespace Game
             return highScores;
         }
 
-        static void Level()
+        static void Level() //Changes the speed of the lines according to the current score
         {
             level = currentScore / 1000;
             if (level > 5)
@@ -481,7 +467,8 @@ namespace Game
             }
             updateRate = 10 - level;
         }
-        static void ResetGame()
+
+        static void ResetGame() //Used to reset scores, positions, levels, etc. when the game is over
         {
             board = new char[size[0], size[1]];
             x = size[0] / 2;
