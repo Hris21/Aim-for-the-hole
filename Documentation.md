@@ -1,11 +1,34 @@
 ﻿# Aim-for-the-hole
 
+https://github.com/Hris21/Aim-for-the-hole
+
 Documentation date update 03/03/2015
 
 This is the documentation for the game Aim For The Hole - chosen by consensus between the programmers and the leader.
 The project main goal was to to put the combined efforts of all the members, thus resulting in great teamwork and results.
 In this program the following people have taken part: 
 Y.Maltsiev(Яни Малцев), shunobaka(Веселин Минев), veselints(Веселин Цветанов), yordansg(Йордан Георгиев), kabumko(Теодор Архондаки), success(Христо Кокалов), toshocorp(Тодор Павлов), Hristiyan_Andreev(Християн Андреев).
+
+--------------------------------------------------------------------------------
+
+Main idea of the game:
+
+The game consists of a main menu, board, a hero, falling lines and bonuses.
+Every line has a hole which is placed at a random spot and the player must go
+through the hole in order to avoid colliding with the wall. Every time the hero
+goes through a hole, he receives points which are used to calculate the level of
+the player and make the lines fall faster. The player may also collect bonuses
+represented by the plus symbol (+) which reward ten times more points than going
+through a line. The bonuses are always placed at a random spot along the board's
+width and in the middle between two lines. If the player fails to avoid collision
+the game screen turns red, says the game is over and waits for the player to press
+enter. Then the player is asked for name and the top10 scores are saved. The game
+provides the player with an extremely user-friendly experience including:
+
+- easy to navigate and understand main menu
+- options to help the player resize the game board according to one's preferences
+- highscore button which lets the player see the scores of the other players
+- exit button followed by confirmation to avoid closing the game by mistake
 
 --------------------------------------------------------------------------------
 
