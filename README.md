@@ -1,6 +1,6 @@
 ﻿# Aim-for-the-hole
 
-Documentation date update 27/02/2015
+Documentation date update 03/03/2015
 
 This is the documentation for the game Aim For The Hole - chosen by consensus between the programmers and the leader.
 The project main goal was to to put the combined efforts of all the members, thus resulting in great teamwork and results.
@@ -59,7 +59,7 @@ PlayerPosition method - keeps track of the player position: cordinates and movem
 
 3.4
 
-Highscores method saves the score of the game and prints the result
+Highscores method - prints the highscores from the external file onto the console
 
 3.5
 
@@ -81,21 +81,43 @@ Options method - the method trough which the board is rescaled on the need of th
 
 ExitConfirm method - a method with which the user should be able to quit the program.
 
-3.10 - pending right now...
+3.10
+
+WriteScores method - when the player dies, this method is responsible for reading the name of the player and adding his score to the highscores file if he is in top10 scores.
+
+3.11
+
+GetHighScores method - Gets all the scores from the external txt file and adds them to the list of scores.
+
+3.12
+
+GetHighScoreNames method - Same as the method above but reads only the names of the players and adds them to another list.
+
+3.13
+
+Level method - changes the speed at which the lines falls according to the current score of the player.
+
+3.14
+
+ResetGame method - when the game is over, this method resets all the positions of lines, bonuses and player, resets the current score of the player and the level.
 
 At least 3 existing .Net Classes!
 
 4.1
 
-Class 1
+System.Threading - used to make the console sleep while in play mode.
 
 4.2
 
-Class 2
+System.IO - used to read and write highscores from/to the external file.
 
 4.3
 
-Class 3
+System.Collections.Generic - Lists are used for the highscores
+
+4.4
+
+System.Text - the whole board is appended to a StringBuilder before being printed on the console
 
 At least 2 exception handlings!
 
@@ -111,7 +133,7 @@ At least 1 use of external text file!
 
 6
 
-Text file
+HighScores.txt - used to keep the players' names and scores so that they are kept when the game closes and can be read from inside the game
 
 --------------------------------------------------------------------------------
 
@@ -130,3 +152,5 @@ Hristiyan_Andreev(Християн Андреев) made the exception handling i
 kabumko(Теодор Архондаки) documentation and scaling difficulty of the game.
 
 yordansg(Йордан Георгиев) has programmed the input and output of the text file for the highscores.
+
+success(Христо Кокалов) helped with programming the game menu and provided the team with useful ideas for the game.
