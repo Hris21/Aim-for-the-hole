@@ -167,8 +167,6 @@ namespace Game
                         }
                     }
                     renderer.Append("\n");
-                    if (gameNotOver == false) { Console.ReadKey(); return; }
-
                 }
                
 
