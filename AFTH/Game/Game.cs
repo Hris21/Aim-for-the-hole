@@ -25,6 +25,7 @@ namespace Game
         static bool gameNotOver = true; // Checks if the game is over - Tosho use this variable to switch it to false if it is over
         static int[] bonusPosition = { 1, size[1] / 2 }; // Position of the bonus
         static int level = 0; // Default level of the game
+        static char bonusSymbol = '+';
 
         static void Main() //Main menu of the game
         {
@@ -202,13 +203,14 @@ namespace Game
             }
             if (player[0] == bonusPosition[0] && player[1] == bonusPosition[1]) // Update score when hitted bonus position
             {
-                currentScore += 100;
-                bonusPosition[1] = 1; // Removes the bonus from the board and initilizes a new bonus ot the top of the field
-                bonusPosition[0] = rnd.Next(1, size[0] - 2);
-                if (bonusPosition[1] == lineHeight)
-                {
-                    bonusPosition[1]--;
-                }
+                bonusSymbol = ' ';
+                currentScore += 10;
+                //bonusPosition[1] = 1; // Removes the bonus from the board and initilizes a new bonus ot the top of the field
+                //bonusPosition[0] = rnd.Next(1, size[0] - 2);
+                //if (bonusPosition[1] == lineHeight)
+                //{
+                //    bonusPosition[1]--;
+                //}
 
             }
         }
@@ -246,7 +248,7 @@ namespace Game
                 }
                 board[line[0], line[1]] = ' ';
                 board[playerPosition[0], playerPosition[1]] = characterFace;
-                board[bonusPosition[0], bonusPosition[1]] = '+';
+                board[bonusPosition[0], bonusPosition[1]] = bonusSymbol;
                 lineHeight = line[1]; // Check the position of the player according to the line 
             }
             catch (IndexOutOfRangeException)
@@ -285,6 +287,7 @@ namespace Game
                 bonusPosition[1]++;
                 if (bonusPosition[1] > size[1] - 2)
                 {
+                    bonusSymbol = '+';
                     bonusPosition[1] = 1;
                     bonusPosition[0] = rnd.Next(1, size[0] - 2);
                 }
@@ -441,7 +444,7 @@ namespace Game
 
         static void Level()
         {
-            level = currentScore / 1500;
+            level = currentScore / 1000;
             if (level > 5)
             {
                 level = 5;
