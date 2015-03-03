@@ -151,7 +151,7 @@ namespace Game
                     {
                         if (gameNotOver)
                         {
-                            renderer.Append("  Level: "); // Draws the score
+                            renderer.Append("  Level: "); // Draws the level
                             renderer.Append(level);
                         }
                     }
@@ -202,7 +202,14 @@ namespace Game
             }
             if (player[0] == bonusPosition[0] && player[1] == bonusPosition[1]) // Update score when hitted bonus position
             {
-                currentScore += 10;
+                currentScore += 100;
+                bonusPosition[1] = 1; // Removes the bonus from the board and initilizes a new bonus ot the top of the field
+                bonusPosition[0] = rnd.Next(1, size[0] - 2);
+                if (bonusPosition[1] == lineHeight)
+                {
+                    bonusPosition[1]--;
+                }
+
             }
         }
 
@@ -262,7 +269,7 @@ namespace Game
                 if (line[1] > size[1] - 2)
                 {
                     line[1] = 1;
-                    line[0] = rnd.Next(1, size[1] - 2);
+                    line[0] = rnd.Next(1, size[0] - 2);
                 }
                 updateLineCount = 0;
             }
@@ -279,7 +286,7 @@ namespace Game
                 if (bonusPosition[1] > size[1] - 2)
                 {
                     bonusPosition[1] = 1;
-                    bonusPosition[0] = rnd.Next(1, size[1] - 2);
+                    bonusPosition[0] = rnd.Next(1, size[0] - 2);
                 }
                 updateBonusesCount = 0;
             }
