@@ -20,10 +20,11 @@ namespace Game
         static int updateLineCount = 0; //update counter for the lines
         static int updateBonusesCount = 0; //update counter of the bonus points
         static int[] playerPosition = { x, y }; // Player coordinates
-        static long currentScore = 0; // The current score of the player
+        static int currentScore = 0; // The current score of the player
         static int lineHeight = 0; // Line position according to the player
         static bool gameNotOver = true; // Checks if the game is over - Tosho use this variable to switch it to false if it is over
         static int[] bonusPosition = { 1, size[1] / 2 }; // Position of the bonus
+        static int level = 0; // Default level of the game
 
         static void Main() //Main menu of the game
         {
@@ -125,6 +126,7 @@ namespace Game
                 char[,] board = new char[width, height];
                 board = Board(board, line, playerPosition, bonusPosition);
                 PlayerPosition(playerPosition);
+                Level();
                 StringBuilder renderer = new StringBuilder("");
                 for (int i = 0; i < board.GetLength(1); i++)
                 {
@@ -132,7 +134,7 @@ namespace Game
                     {
                         renderer.Append(board[j, i]);
                     }
-                    if (i == size[1] / 2)
+                    if (i == size[1] / 2 - 1)
                     {
                         if (gameNotOver)
                         {
@@ -143,6 +145,14 @@ namespace Game
                         {
                             Console.ForegroundColor = ConsoleColor.Red;
                             renderer.Append("  GAME OVER!!!"); // Game over message
+                        }
+                    }
+                    if (i == size[1] / 2 + 1)
+                    {
+                        if (gameNotOver)
+                        {
+                            renderer.Append("  Level: "); // Draws the score
+                            renderer.Append(level);
                         }
                     }
                     renderer.Append("\n");
@@ -406,7 +416,6 @@ namespace Game
             }
         }
 
-
         public static List<long> GetHighScores()
         {
             string line;
@@ -421,6 +430,16 @@ namespace Game
                 }
             }
             return highScores;
+        }
+
+        static void Level()
+        {
+            level = currentScore / 1500;
+            if (level > 5)
+            {
+                level = 5;
+            }
+            updateRate = 10 - level;
         }
     }
 }
