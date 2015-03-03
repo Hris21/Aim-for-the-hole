@@ -22,7 +22,7 @@ namespace Game
         static int[] playerPosition = { x, y }; // Player coordinates
         static int currentScore = 0; // The current score of the player
         static int lineHeight = 0; // Line position according to the player
-        static bool gameNotOver = true; // Checks if the game is over - Tosho use this variable to switch it to false if it is over
+        static bool gameNotOver = true; // Checks if the game is over
         static int[] bonusPosition = { 1, size[1] / 2 }; // Position of the bonus
         static int level = 0; // Default level of the game
         static char bonusSymbol = '+';
@@ -177,8 +177,14 @@ namespace Game
                 if (gameNotOver == false)
                 {
                     WriteScores();
-                    Console.ReadKey();
-                    return;
+                    while (true)
+                    {
+                        ConsoleKeyInfo userInput = Console.ReadKey();
+                        if (userInput.Key == ConsoleKey.Enter)
+                        {
+                            return;
+                        }
+                    }
                 }
                 Thread.Sleep(20);
             }
