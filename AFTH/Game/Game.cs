@@ -29,11 +29,12 @@ namespace Game
 
         static void Main() //Main menu of the game
         {
+            Console.Title = "Aim For The Hole";
             Console.Clear();
 
             while (true)
             {
-                Console.Clear();         
+                Console.Clear();
                 for (int i = 0; i < 5; i++)                //If this for was missing
                 {
                     Console.WriteLine();
@@ -46,7 +47,8 @@ namespace Game
                 Console.WriteLine(String.Format("{0," + Console.WindowWidth / 2 + "}", "Options"));
                 Console.WriteLine();
                 Console.WriteLine(String.Format("{0," + Console.WindowWidth / 2 + "}", "Exit"));
-                int startCol = 43;  int positionUpDown = 5;  //I just had to guess the right cordinates for the pointer.I've written them on one row so you know that these are the coordinates.
+                int startCol = 43;
+                int positionUpDown = 5;  //I just had to guess the right cordinates for the pointer.I've written them on one row so you know that these are the coordinates.
                 char arrowForMenu = (char)17; //The arrow for the menu.
                 while (true)
                 {
@@ -89,7 +91,7 @@ namespace Game
                 try
                 {
 
-                    switch (positionUpDown - 4)            
+                    switch (positionUpDown - 4)
                     {
                         case 1:
                             Play(size[0], size[1]);
@@ -225,7 +227,7 @@ namespace Game
         }
 
         static char[,] Board(char[,] board, int[] line, int[] playerPosition, int[] bonusPosition) //Fills the game board
-        {  
+        {
             char characterFace = (char)1;
             try
             {
