@@ -12,7 +12,7 @@ namespace Game
     class Game
     {
         const string highScoresFile = "HighScores.txt";
-        static int[] size = { 8, 8 }; // size[0] - width; size[1] - height
+        static int[] size = { 35, 20 }; // size[0] - width; size[1] - height
         static char[,] board = new char[size[0], size[1]]; //main game board
         static int x = size[0] / 2; // player x
         static int y = size[1] - 2; // player y
