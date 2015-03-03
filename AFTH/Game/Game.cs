@@ -30,7 +30,7 @@ namespace Game
         static void Main() //Main menu of the game
         {
             Console.BufferHeight = Console.WindowHeight; //remove the buffer (scrollbar)
-            Console.BufferWidth = Console.WindowWidth; 
+            Console.BufferWidth = Console.WindowWidth;
 
             Console.Title = "Aim For The Hole";
             Console.Clear();
@@ -178,26 +178,26 @@ namespace Game
                     }
                     renderer.Append("\n");
                 }
-               
+
 
 
                 Console.Clear();
                 Console.WriteLine(renderer);
                 if (gameNotOver == false)
                 {
-                    WriteScores();
                     while (true)
                     {
                         ConsoleKeyInfo userInput = Console.ReadKey();
                         if (userInput.Key == ConsoleKey.Enter)
                         {
+                            WriteScores();
                             return;
                         }
                     }
                 }
                 Thread.Sleep(20);
             }
-            
+
         }
 
         static void PlayerPosition(int[] player) //Check for pressed key and changes player position
@@ -248,11 +248,10 @@ namespace Game
             Console.Clear();
             Console.WriteLine("Highscores:");
             List<long> highScores = GetHighScores();
-            int count = 1;
-            foreach (var item in highScores)
+            List<string> names = GetHighScoreNames();
+            for (int i = 0; i < highScores.Count; i++)
             {
-                Console.WriteLine(string.Format("{0}. {1}", count, item));
-                count++;
+                Console.WriteLine(string.Format("{0,2}. {1,8} - {2}", i + 1, names[i], highScores[i]));
             }
             Console.ReadLine();
         }
@@ -286,7 +285,7 @@ namespace Game
                 if (playerPosition[1] == line[1] && playerPosition[0] != line[0]) //The death
                 {
                     gameNotOver = false;
-                 }
+                }
             }
             catch (IndexOutOfRangeException)
             {
@@ -426,29 +425,52 @@ namespace Game
 
         public static void WriteScores() //When the highscores change, writes them in the external file
         {
-            const int maxRecordedScores = 10;
-            List<long> highScores = GetHighScores();
-            if (highScores.Count < maxRecordedScores || currentScore > highScores.Last())
+            Console.WriteLine("Enter name up to 8 symbols:");
+            string playerName = Console.ReadLine();
+            while (playerName.Length > 8)
             {
-                highScores.Add(currentScore);
-                highScores.Sort();
-                highScores.Reverse();
+                Console.Clear();
+                Console.WriteLine("Enter name up to 8 symbols:");
+                playerName = Console.ReadLine();
+            }
+            const int maxRecordedScores = 10;
 
-                if (highScores.Count > maxRecordedScores)
-                {
-                    highScores.RemoveAt(highScores.Count - 1);
-                }
+            List<long> highScores = GetHighScores();
+            List<string> highScoreNames = GetHighScoreNames();
 
-                using (System.IO.StreamWriter file =
-                    new System.IO.StreamWriter(File.Open(highScoresFile, FileMode.OpenOrCreate)))
-                {
-                    foreach (var item in highScores)
-                    {
-                        file.WriteLine(item);
-                    }
-                }
+            long[] scores = new long[highScores.Count + 1];
+            string[] names = new string[highScores.Count + 1];
+
+            highScores.Add(currentScore);
+            highScoreNames.Add(playerName);
+
+            for (int i = 0; i < scores.Length; i++)
+            {
+                scores[i] = highScores[i];
+                names[i] = highScoreNames[i];
             }
 
+            Array.Sort(scores, names);
+
+            using (System.IO.StreamWriter file =
+                new System.IO.StreamWriter(File.Open(highScoresFile, FileMode.OpenOrCreate)))
+            {
+                if (scores.Length >= maxRecordedScores)
+                {
+                    for (int i = scores.Length - 1; i >= scores.Length - maxRecordedScores; i--)
+                    {
+                        file.WriteLine("{0,-8} - {1}", names[i], scores[i]);
+                    }
+                }
+                else
+                {
+                    for (int i = scores.Length - 1; i >= 0; i--)
+                    {
+                        file.WriteLine("{0,-8} - {1}", names[i], scores[i]);
+                    }
+                }
+                file.Flush();
+            }
         }
 
         public static List<long> GetHighScores() //Used to read the highscores from the external file
@@ -458,13 +480,31 @@ namespace Game
             using (System.IO.StreamReader file =
                 new System.IO.StreamReader(File.Open(highScoresFile, FileMode.OpenOrCreate)))
             {
-                while ((line = file.ReadLine()) != null)
+                line = file.ReadLine();
+                while ((line != string.Empty) && (line != null))
                 {
-
-                    highScores.Add(long.Parse(line));
+                    highScores.Add(long.Parse(line.Substring(10)));
+                    line = file.ReadLine();
                 }
             }
             return highScores;
+        }
+
+        static List<string> GetHighScoreNames()
+        {
+            string line;
+            List<string> names = new List<string>();
+            using (System.IO.StreamReader file =
+                new System.IO.StreamReader(File.Open(highScoresFile, FileMode.OpenOrCreate)))
+            {
+                line = file.ReadLine();
+                while ((line != string.Empty) && (line != null))
+                {
+                    names.Add(line.Substring(0, 8));
+                    line = file.ReadLine();
+                }
+            }
+            return names;
         }
 
         static void Level() //Changes the speed of the lines according to the current score
