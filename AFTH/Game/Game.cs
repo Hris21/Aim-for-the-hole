@@ -44,7 +44,7 @@ namespace Game
                 {
                     Console.WriteLine();
                 }
-
+                Console.SetWindowSize(85, 27);
                 Console.WriteLine(String.Format("{0," + Console.WindowWidth / 2 + "}", "Play"));        //Using basic formating, to be sure that everything is..
                 Console.WriteLine();                                                                    //..in the center.
                 Console.WriteLine(String.Format("{0," + Console.WindowWidth / 2 + "}", "Highscores"));
